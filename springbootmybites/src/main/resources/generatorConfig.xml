@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 引入 application.yml -->
+    <properties resource="application.properties" />
+
+    <!-- MyBatis3Simple：不生成 Example相關類及方法 -->
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`" />
+        <property name="endingDelimiter" value="`" />
+
+        <!-- 指定生成 Mapper 的繼承模板 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="${generatorConfiguration.mappers}" />
+        </plugin>
+
+        <!-- 生成 JavaBean 對象重寫 toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+        <!-- 生成 JavaBean 對象繼承 Serializable 類 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+        <!-- 生成 JavaBean 對象重寫 equals 和 hashCode 方法 -->
+        <!-- <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" /> -->
+
+        <!-- jdbc 連接配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://67.218.159.166:3306/springboottest?useUnicode=true&amp;characterEncoding=utf-8"
+                        userId="root"
+                        password="923469an">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="${generatorConfiguration.javaModelGenerator.targetPackage}"
+                            targetProject="${generatorConfiguration.javaModelGenerator.targetProject}" />
+
+        <sqlMapGenerator targetPackage="${generatorConfiguration.sqlMapGenerator.targetPackage}"
+                         targetProject="${generatorConfiguration.sqlMapGenerator.targetProject}" />
+
+        <javaClientGenerator targetPackage="${generatorConfiguration.javaClientGenerator.targetPackage}"
+                             targetProject="${generatorConfiguration.javaClientGenerator.targetProject}" type="XMLMAPPER" />
+
+        <!-- Mysql 配置 -->
+        <!-- <generatedKey column="id" sqlStatement="Mysql" identity="true" /> -->
+        <!-- Oracle 配置 -->
+        <!-- <generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/> -->
+
+        <!-- tableName：數據庫表名，domainObjectName：生成文檔名 ，schema：數據源-->
+        <table tableName="spring_user" domainObjectName="">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true" />
+        </table>
+
+    </context>
+</generatorConfiguration>
